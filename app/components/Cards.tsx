@@ -18,16 +18,23 @@ export default function Cards({ paperName, articles = [] }: CardProps) {
                 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:rounded-xl [&::-webkit-scrollbar-track]:bg-gray-100">
                 {articles.length > 0 ? (
                     articles.map((article, index) => (
-                        <div key={index} className="mb-4">
-                            <a href={article.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline font-semibold">
+                        <div key={index} className="mb-4 gap-2">
+                            <p className="font-semibold text-[#6A7F8C] text-lg">
                                 {article.title}
-                            </a>
-                            {article.description !== 'No Description' && (
-                                <p className="text-sm text-gray-600 mt-1">
-                                    {article.description.split(" ").slice(0, 50).join(" ")}
-                                    {article.description.split(" ").length > 50 && "..."}
-                                </p>
-                            )}
+                            </p>
+                            <div>
+                                <button 
+                                    className="bg-slate-300 p-1 rounded-md font-semibold shadow-md mx-2 hover:bg-slate-200"
+                                    onClick={() => window.open(`/summary?url=${encodeURIComponent(article.description)}`,'_blank')}
+                                >
+                                    <span className="text-sm hover:text-blue-700">Generate the summary</span>
+                                </button>
+                                <button className="bg-slate-300 p-1 rounded-md font-semibold shadow-md hover:bg-slate-200">
+                                    <a href={article.url} target="_blank">
+                                    <span className="text-sm hover:text-blue-700">Link to article</span>
+                                    </a>
+                                </button>
+                            </div>
                         </div>
                     ))
                 ) : (
